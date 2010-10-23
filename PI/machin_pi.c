@@ -33,7 +33,6 @@ int main(int argc, char *argv[]) {
 	mpf_t arctan_one_five;
 	mpf_t arctan_one_twothreenine;
 	mpf_t pi;
-	int i;
 
 	mpf_set_default_prec(PI_PRECISION);
 	mpf_init(pi);
@@ -97,11 +96,13 @@ int thread_calc(void *func, mpf_t *total) {
 // Approximates arctan(1/5)
 void *calc_arctan_one_five(void *i) {
 	calc_arctan(*((int *) i), 1, 5);
+	return 0;
 }
 
 // Approximates arctan(1/239)
 void *calc_arctan_one_twothreenine(void *i) {
 	calc_arctan(*((int *) i), 1, 239);
+	return 0;
 }
 
 // A helper function that finds an approximation of
