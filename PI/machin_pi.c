@@ -57,6 +57,8 @@ int main(int argc, char *argv[]) {
 	gmp_printf("%d iterations: %.128Ff\n", ITERATIONS, pi);
 	
 	mpf_clear(pi);
+	mpf_clear(arctan_one_five);
+	mpf_clear(arctan_one_twothreenine);
 	return 0;
 }
 
