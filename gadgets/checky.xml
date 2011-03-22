@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Module>
+  <ModulePrefs title="Checkbox" height="50">
+    <Require feature="rpc" />
+    <Require feature="dynamic-height"/>
+  </ModulePrefs>
+
+  <Content type="html">
+    <![CDATA[
+      <link rel="stylesheet" type="text/css" href="http://wave-gadgets.appspot.com/stylesheets/style.css" />
+
+      <script type="text/javascript" src="http://wave-gadgets.appspot.com/javascripts/wave.js"></script>
+      <script type="text/javascript" src="http://wave-gadgets.appspot.com/javascripts/prototype.js"></script>
+      <script type="text/javascript" src="http://wave-gadgets.appspot.com/javascripts/effects.js"></script>
+      <script type="text/javascript" src="http://wave-gadgets.appspot.com/javascripts/dragdrop.js"></script>
+      <script type="text/javascript" src="http://wave-gadgets.appspot.com/javascripts/application.js"></script>
+
+      <div id='unchecked_item_template' class='template'>
+        <div id='item_#{id}' class='item unchecked' onmouseover='showControl(#{id});' onmouseout='hideControls();'>
+          <input id='checkbox_#{id}' class='checkbox' type='checkbox' onclick="updateCheckbox(#{id})" />
+          <div id='text_#{id}' class='text'>#{text}</div>
+          <form id='edit_item_#{id}' class='edit_item' style='display: none;' onsubmit="try{ saveEdit(#{id}); } finally { return false; }">
+            <input id='edit_text_#{id}' class='edit_text'></input>
+
+            <div class='done'>
+              <input type='submit' value='Save changes' /> or
+              <a href='#' onclick='try { cancelEdit(#{id}); } finally { return false; }'>Cancel</a>
+            </div>
+          </form>
+
+          <div id='control_#{id}' class='control' style='display: none;'>
+            <div class='edit'>
+              <a href='#' onclick="try { editItem(#{id}); } finally { return false; }">
+                Edit
+              </a>
+            </div>
+
+            <div class='delete'>
+              <a href='#' onclick="try { deleteItem(#{id}); } finally { return false; }">
+                <img src='http://wave-gadgets.appspot.com/images/trash.gif' />
+              </a>
+            </div>
+          </div>
+
+          <div class='clear'></div>
+        </div>
+      </div>
+
+      <div id='checked_item_template' class='template'>
+        <div id='item_#{id}' class='item checked'>
+          <input id='checkbox_#{id}' class='checkbox' type='checkbox' onclick="updateCheckbox(#{id})" checked='checked' />
+
+          <div class='delete'>
+            <a href='#' onclick="try { deleteItem(#{id}); } finally { return false; }">
+              <img src='http://wave-gadgets.appspot.com/images/trash.gif' />
+            </a>
+          </div>
+          <div class='completed_time'>#{completed_time}</div>
+
+          <div id='text_#{id}' class='text'>#{text}</div>
+
+          <div class='clear'></div>
+        </div>
+      </div>
+
+      <div id='content' style='display: none;'>
+        <div class='header' onmouseover="showEditTitleLink();" onmouseout="hideEditTitleLink();">
+          <div id='title'><!-- populated by stateUpdated(); --></div>
+          <form id='edit_title' style='display: none;' onsubmit='try { saveTitle(); } finally { return false; }'>
+            <input id='edit_title_field' />
+
+            <div>
+              <div><label for='edit_description'>Optional: List description:</label></div>
+              <div><textarea id='edit_description'></textarea></div>
+            </div>
+
+            <div class='done'>
+              <input type='submit' value='Save changes' /> or
+              <a href='#' onclick='try { hideEditTitleField(); } finally { return false; }'>Cancel</a>
+            </div>
+
+            <div class='clear'></div>
+          </form>
+
+          <div id='edit_title_link' style='display: none;'>
+            <a href='#' onclick='try { showEditTitleField(); } finally { return false; }'>Edit</a>
+          </div>
+
+          <div class='clear'></div>
+        </div>
+
+        <div id='description'><!-- populated by stateUpdated(); --></div>
+
+        <div id='unchecked'><!-- populated by stateUpdated(); --></div>
+
+        <div class='new_item'>
+          <form id='new_item_entry' style='display: none;' onsubmit='try { saveItem(); } finally { return false; }'>
+            <div class='prompt'>Enter a checklist item:</div>
+            <input id='new_text' />
+
+            <div class='done'>
+              <input type='submit' value='Add this item' /> or
+              <a href='#' onclick='try { hideAdd(); } finally { return false; }'>I'm done adding items</a>
+            </div>
+          </form>
+
+          <a id='show_add_button' href='#' onclick='try { showAdd(); } finally { return false; }'>Add an Item</a>
+        </div>
+
+        <div id='checked'><!-- populated by stateUpdated(); --></div>
+
+        <div id='show_all_link' style='display: none;'>
+          <a href='#' onclick="try { showAllChecked(); } finally { return false; }">
+            View all <span id='completed_items'><!-- populated by stateUpdated(); --></span> completed items
+          </a>
+        </div>
+
+        <div id='hidden_checked' style='display: none;'><!-- populated by stateUpdated(); --></div>
+
+        <div id='hide_all_link' style='display: none;'>
+          <a href='#' onclick="try { hideAllChecked(); } finally { return false; }">
+            Hide completed items
+          </a>
+        </div>
+      </div>
+
+      <div id='loading'>
+        <table>
+          <tr>
+            <td>
+              <img src='http://wave-gadgets.appspot.com/images/gadget.png' height=50 width=50 />
+            </td>
+
+            <td>
+              Checky the Checklist Gadget
+            </td>
+          </tr>
+        </table>
+      </div>
+    ]]>
+  </Content>
+</Module>
